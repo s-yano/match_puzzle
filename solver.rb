@@ -11,8 +11,8 @@ class Solver
     @area = VirtualMatrix.new(0)
   end
 
-  def print_area(a)
-    a.print_matrix(0 => "  ", 1 => "＼", 2 => "／")
+  def print_area
+    @area.print_matrix(0 => "  ", 1 => "＼", 2 => "／")
   end
 
   def solve!
@@ -20,22 +20,22 @@ class Solver
     @count
   end
 
-  def same_pattern?(a)
-    a1 = a
+  def same_pattern?
+    a1 = @area
     4.times do
       a1 = a1.rotate.conv
       return true if @result.include?(a1.to_s)
       a2 = a1.mirror.conv
       return true if @result.include?(a2.to_s)
     end
-    @result << a.to_s
+    @result << @area.to_s
     false
   end
 
   def sub(x, y, m, dep)
     if @num == dep
-      return if same_pattern?(@area)
-      print_area(@area)
+      return if same_pattern?
+      print_area
       puts "--------------------"
       @count += 1
       return
